@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2010" viewBox="0 0 1600 2010" role="img" aria-labelledby="title desc">
+  <title id="title">BTS SIO · Architecture MVC · De l’URL au contrôleur métier</title>
+  <desc id="desc">Une URL contient une adresse, un point d'entrée et un paramètre action. Le navigateur réalise une action en envoyant une requête HTTP. Le contrôleur frontal extrait la valeur du paramètre action de l'URL transmise dans cette requête, puis sollicite le contrôleur métier correspondant. Celui-ci coordonne le modèle et la vue. Le modèle communique avec un serveur de bases de données pour accéder aux données de l'application. La vue produit le code HTML/CSS de la page demandée, renvoyé au navigateur dans une réponse HTTP.</desc>
+  <defs>
+    <style>
+      .sans{font-family:Arial,Helvetica,sans-serif}
+      .mono{font-family:Menlo,Consolas,monospace}
+      .ink{fill:#14263d}
+      .muted{fill:#52637a}
+      .white{fill:#fff}
+      .head{font-size:33px;font-weight:700}
+      .label{font-size:19px;font-weight:700;letter-spacing:1px}
+      .body{font-size:22px}
+      .flow{font-size:20px;font-weight:700}
+    </style>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="9" flood-color="#1d3556" flood-opacity=".11"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11" fill="none" stroke="#70849e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arrow-start" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto-start-reverse"><path d="M1 1 L10 6 L1 11" fill="none" stroke="#70849e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+
+  <rect width="1600" height="2010" fill="#f3f6fb"/>
+<rect width="1600" height="184" fill="#14263d"/>
+<rect x="70" y="38" width="9" height="108" rx="4" fill="#52c2ae"/>
+<text class="sans white" x="105" y="44" font-size="23" font-weight="700" letter-spacing="1">BTS SIO</text>
+<line x1="232" y1="25" x2="232" y2="50" stroke="#7990ab" stroke-width="2"/>
+<text class="sans" x="255" y="44" font-size="23" font-weight="700" fill="#aee9de" letter-spacing="1">Architecture MVC</text>
+<text class="sans white" x="105" y="100" font-size="43" font-weight="700">De l’URL au contrôleur métier</text>
+<text class="sans" x="106" y="141" font-size="23" fill="#cdd9e8">Requête HTTP · paramètre action · routage</text>
+<g transform="translate(1386 14)" role="img" aria-label="Logo MVC : modèle, contrôleur et vue">
+  <rect width="168" height="154" rx="24" fill="#213b5a" stroke="#486887" stroke-width="2"/>
+  <path d="M49 57 L119 57 L84 117 Z" fill="none" stroke="#8ca4ba" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="49" cy="57" r="29" fill="#8167c8"/>
+  <circle cx="119" cy="57" r="29" fill="#e99635"/>
+  <circle cx="84" cy="117" r="29" fill="#20a393"/>
+  <text class="sans white" x="49" y="67" font-size="29" font-weight="700" text-anchor="middle">M</text>
+  <text class="sans white" x="119" y="67" font-size="29" font-weight="700" text-anchor="middle">C</text>
+  <text class="sans white" x="84" y="127" font-size="29" font-weight="700" text-anchor="middle">V</text>
+</g>
+  <!-- URL anatomy -->
+  <text class="sans muted" x="74" y="215" font-size="20" font-weight="700" letter-spacing="1">COMMENT LIRE UNE URL ?</text>
+  <line x1="74" y1="231" x2="1528" y2="231" stroke="#cfdae6" stroke-width="2"/>
+  <g filter="url(#shadow)"><rect x="75" y="253" width="1450" height="194" rx="18" fill="#fff"/></g>
+  <text class="sans ink" x="103" y="292" font-size="23" font-weight="700">Exemple :</text>
+  <rect x="103" y="310" width="515" height="51" rx="9" fill="#edf1f6"/>
+  <rect x="618" y="310" width="357" height="51" fill="#e6f2ff"/>
+  <rect x="975" y="310" width="522" height="51" rx="9" fill="#fff1df"/>
+  <text class="mono" x="124" y="344" font-size="24" fill="#52637a">https://exemple.test</text>
+  <text class="mono" x="643" y="344" font-size="24" fill="#2766ad">/index.php</text>
+  <text class="mono" x="1001" y="344" font-size="24" fill="#a66216">?action=create</text>
+  <text class="sans" x="110" y="390" font-size="21" font-weight="700" fill="#52637a">Adresse du site</text>
+  <text class="sans" x="642" y="390" font-size="21" font-weight="700" fill="#2766ad">Point d’entrée unique</text>
+  <text class="sans" x="1001" y="390" font-size="21" font-weight="700" fill="#a66216">Paramètre « action »</text>
+  <text class="sans muted" x="103" y="428" font-size="21">GET ou POST accompagne la requête : la méthode HTTP ne fait pas partie de l’URL.</text>
+
+  <!-- Route examples -->
+  <g filter="url(#shadow)"><rect x="75" y="466" width="1450" height="81" rx="16" fill="#fff"/></g>
+  <text class="mono ink" x="105" y="504" font-size="21">GET ?action=list</text>
+  <text class="sans muted" x="105" y="531" font-size="19">afficher une liste</text>
+  <line x1="519" y1="481" x2="519" y2="533" stroke="#d5dfeb" stroke-width="2"/>
+  <text class="mono ink" x="548" y="504" font-size="21">GET ?action=create</text>
+  <text class="sans muted" x="548" y="531" font-size="19">afficher un formulaire</text>
+  <line x1="1020" y1="481" x2="1020" y2="533" stroke="#d5dfeb" stroke-width="2"/>
+  <text class="mono ink" x="1049" y="504" font-size="21">POST ?action=create</text>
+  <text class="sans muted" x="1049" y="531" font-size="19">traiter la soumission</text>
+
+  <text class="sans muted" x="74" y="602" font-size="20" font-weight="700" letter-spacing="1">PARCOURS DE LA REQUÊTE</text>
+  <line x1="74" y1="618" x2="1528" y2="618" stroke="#cfdae6" stroke-width="2"/>
+
+  <!-- Browser -->
+  <g filter="url(#shadow)"><rect x="570" y="646" width="460" height="102" rx="18" fill="#fff"/></g>
+  <rect x="570" y="646" width="9" height="102" rx="4" fill="#94a3b8"/>
+  <text class="sans ink" x="601" y="689" font-size="31" font-weight="700">Utilisateur / navigateur</text>
+  <text class="sans muted" x="601" y="723" font-size="21">Envoie une requête HTTP ; reçoit la page.</text>
+
+  <!-- Front controller -->
+  <g filter="url(#shadow)"><rect x="510" y="825" width="580" height="209" rx="19" fill="#fff"/></g>
+  <rect x="510" y="825" width="10" height="209" rx="5" fill="#3986dc"/>
+  <text class="sans label" x="545" y="859" fill="#2766ad">POINT D’ENTRÉE</text>
+  <text class="sans ink head" x="545" y="901">Contrôleur frontal</text>
+  <line x1="545" y1="919" x2="1052" y2="919" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans" x="545" y="948" font-size="19" font-weight="700" fill="#2766ad">DÉFINITION</text>
+  <text class="sans ink body" x="690" y="948">Entrée unique de l’application.</text>
+  <text class="sans" x="545" y="981" font-size="19" font-weight="700" fill="#2766ad">RÔLE</text>
+  <text class="sans ink body" x="635" y="981">Extrait le paramètre « action » de l’URL</text>
+  <text class="sans ink body" x="545" y="1011">de la requête HTTP pour choisir le contrôleur métier.</text>
+
+  <!-- Business controllers -->
+  <g filter="url(#shadow)"><rect x="510" y="1119" width="580" height="225" rx="19" fill="#fff"/></g>
+  <rect x="510" y="1119" width="10" height="225" rx="5" fill="#e99635"/>
+  <text class="sans label" x="545" y="1153" fill="#a66216">C · TRAITEMENT D’UNE ACTION</text>
+  <text class="sans ink head" x="545" y="1195">Contrôleurs métiers</text>
+  <line x1="545" y1="1213" x2="1052" y2="1213" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans" x="545" y="1242" font-size="19" font-weight="700" fill="#a66216">DÉFINITION</text>
+  <text class="sans ink body" x="690" y="1242">Fonctions qui traitent une action précise.</text>
+  <text class="sans" x="545" y="1275" font-size="19" font-weight="700" fill="#a66216">RÔLE</text>
+  <text class="sans ink body" x="635" y="1275">Lire GET/POST et valider les données ;</text>
+  <text class="sans ink body" x="545" y="1305">appeler le modèle, choisir la vue ou rediriger.</text>
+
+  <!-- Model -->
+  <g filter="url(#shadow)"><rect x="80" y="1520" width="625" height="212" rx="19" fill="#fff"/></g>
+  <rect x="80" y="1520" width="10" height="212" rx="5" fill="#8167c8"/>
+  <text class="sans label" x="116" y="1554" fill="#6950b2">M · MODÈLE</text>
+  <text class="sans ink head" x="116" y="1596">Données et règles métier</text>
+  <line x1="116" y1="1613" x2="666" y2="1613" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans" x="116" y="1646" font-size="19" font-weight="700" fill="#6950b2">DÉFINITION</text>
+  <text class="sans ink body" x="259" y="1646">État et règles de l’application.</text>
+  <text class="sans" x="116" y="1680" font-size="19" font-weight="700" fill="#6950b2">RÔLE</text>
+  <text class="sans ink body" x="205" y="1680">Appliquer les règles métier ; communiquer</text>
+  <text class="sans ink body" x="116" y="1711">avec le serveur pour accéder aux données.</text>
+
+  <!-- View -->
+  <g filter="url(#shadow)"><rect x="895" y="1520" width="625" height="212" rx="19" fill="#fff"/></g>
+  <rect x="895" y="1520" width="10" height="212" rx="5" fill="#20a393"/>
+  <text class="sans label" x="931" y="1554" fill="#147769">V · VUE</text>
+  <text class="sans ink head" x="931" y="1596">Présentation à l’utilisateur</text>
+  <line x1="931" y1="1613" x2="1481" y2="1613" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans" x="931" y="1646" font-size="19" font-weight="700" fill="#147769">DÉFINITION</text>
+  <text class="sans ink body" x="1074" y="1646">Représentation des informations.</text>
+  <text class="sans" x="931" y="1680" font-size="19" font-weight="700" fill="#147769">RÔLE</text>
+  <text class="sans ink body" x="1020" y="1680">Produire le code HTML/CSS de la page</text>
+  <text class="sans ink body" x="931" y="1711">demandée à partir des données reçues.</text>
+
+  <!-- Le serveur de bases de données est extérieur aux trois composants MVC -->
+  <g filter="url(#shadow)"><rect x="80" y="1863" width="630" height="120" rx="20" fill="#fff"/></g>
+  <rect x="80" y="1863" width="10" height="120" rx="5" fill="#94a3b8"/>
+  <text class="sans label" x="117" y="1894" fill="#52637a">HORS MVC</text>
+  <text class="sans ink" x="117" y="1929" font-size="29" font-weight="700">Serveur de bases de données</text>
+  <text class="sans muted" x="117" y="1963" font-size="22">Stocke les données de l’application.</text>
+
+  <!-- Request and routing arrows -->
+  <path d="M800 748 V825" fill="none" stroke="#70849e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="824" y="767" width="231" height="34" rx="17" fill="#e8eef5"/>
+  <text class="sans flow" x="841" y="791" fill="#52637a">1 · requête HTTP</text>
+  <path d="M800 1034 V1119" fill="none" stroke="#70849e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="824" y="1059" width="204" height="34" rx="17" fill="#e8eef5"/>
+  <text class="sans flow" x="841" y="1083" fill="#52637a">2 · action extraite</text>
+
+  <!-- Business controller branches -->
+  <path d="M650 1344 L452 1520" fill="none" stroke="#70849e" stroke-width="3" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+  <rect x="175" y="1424" width="289" height="35" rx="17" fill="#f0ebff"/>
+  <text class="sans flow" x="193" y="1449" fill="#6950b2">3 · demande / données</text>
+  <path d="M950 1344 L1148 1520" fill="none" stroke="#70849e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="1095" y="1424" width="294" height="35" rx="17" fill="#e1f6f1"/>
+  <text class="sans flow" x="1113" y="1449" fill="#147769">4 · vue si affichage</text>
+
+  <!-- Model/database and view/browser -->
+  <path d="M395 1732 V1863" fill="none" stroke="#70849e" stroke-width="3" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+  <rect x="421" y="1779" width="231" height="36" rx="18" fill="#f0ebff"/>
+  <text class="sans flow" x="440" y="1804" fill="#6950b2">requêtes / résultats</text>
+  <path d="M1520 1625 H1550 V695 H1030" fill="none" stroke="#20a393" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="1165" y="1185" width="377" height="35" rx="17" fill="#e1f6f1"/>
+  <text class="sans flow" x="1184" y="1210" fill="#147769">5 · réponse HTTP : HTML/CSS</text>
+
+</svg>

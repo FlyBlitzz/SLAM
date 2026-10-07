@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1510" viewBox="0 0 1600 1510" role="img" aria-labelledby="title desc">
+  <title id="title">BTS SIO · Architecture MVC · Le rôle du modèle, de la vue et du contrôleur</title>
+  <desc id="desc">Schéma général de l'architecture Modèle-Vue-Contrôleur. L'utilisateur réalise une action en envoyant une requête HTTP au contrôleur. Le contrôleur échange avec le modèle, puis choisit une vue. Le modèle communique avec un serveur de bases de données pour accéder aux données de l'application. La vue produit le code HTML/CSS de la page demandée, que l'application renvoie à l'utilisateur dans une réponse HTTP. Chaque composant présente sa définition et son rôle.</desc>
+  <defs>
+    <style>
+      .sans{font-family:Arial,Helvetica,sans-serif}
+      .ink{fill:#14263d}
+      .muted{fill:#52637a}
+      .white{fill:#fff}
+      .card-title{font-size:37px;font-weight:700}
+      .small-label{font-size:19px;font-weight:700;letter-spacing:1px}
+      .body{font-size:24px}
+      .flow{font-size:20px;font-weight:700}
+    </style>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="9" flood-color="#1d3556" flood-opacity=".11"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11" fill="none" stroke="#70849e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arrow-start" markerWidth="12" markerHeight="12" refX="3" refY="6" orient="auto-start-reverse"><path d="M1 1 L10 6 L1 11" fill="none" stroke="#70849e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+
+  <rect width="1600" height="1510" fill="#f3f6fb"/>
+<rect width="1600" height="184" fill="#14263d"/>
+<rect x="70" y="38" width="9" height="108" rx="4" fill="#52c2ae"/>
+<text class="sans white" x="105" y="44" font-size="23" font-weight="700" letter-spacing="1">BTS SIO</text>
+<line x1="232" y1="25" x2="232" y2="50" stroke="#7990ab" stroke-width="2"/>
+<text class="sans" x="255" y="44" font-size="23" font-weight="700" fill="#aee9de" letter-spacing="1">Architecture MVC</text>
+<text class="sans white" x="105" y="100" font-size="43" font-weight="700">Le rôle du modèle, de la vue et du contrôleur</text>
+<text class="sans" x="106" y="141" font-size="23" fill="#cdd9e8">Une vue générale des trois composants MVC</text>
+<g transform="translate(1386 14)" role="img" aria-label="Logo MVC : modèle, contrôleur et vue">
+  <rect width="168" height="154" rx="24" fill="#213b5a" stroke="#486887" stroke-width="2"/>
+  <path d="M49 57 L119 57 L84 117 Z" fill="none" stroke="#8ca4ba" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="49" cy="57" r="29" fill="#8167c8"/>
+  <circle cx="119" cy="57" r="29" fill="#e99635"/>
+  <circle cx="84" cy="117" r="29" fill="#20a393"/>
+  <text class="sans white" x="49" y="67" font-size="29" font-weight="700" text-anchor="middle">M</text>
+  <text class="sans white" x="119" y="67" font-size="29" font-weight="700" text-anchor="middle">C</text>
+  <text class="sans white" x="84" y="127" font-size="29" font-weight="700" text-anchor="middle">V</text>
+</g>
+<text class="sans muted" x="73" y="217" font-size="20" font-weight="700" letter-spacing="1">PARCOURS D’UNE ACTION UTILISATEUR</text>
+  <line x1="73" y1="233" x2="1528" y2="233" stroke="#cfdae6" stroke-width="2"/>
+
+  <!-- Acteur externe à MVC -->
+  <g filter="url(#shadow)"><rect x="560" y="252" width="480" height="105" rx="18" fill="#fff"/></g>
+  <rect x="560" y="252" width="9" height="105" rx="4" fill="#94a3b8"/>
+  <text class="sans ink" x="591" y="297" font-size="31" font-weight="700">Utilisateur / navigateur</text>
+  <text class="sans muted" x="591" y="332" font-size="20">Agit par requête HTTP ; reçoit la page.</text>
+
+  <!-- Contrôleur -->
+  <g filter="url(#shadow)"><rect x="500" y="439" width="600" height="325" rx="20" fill="#fff"/></g>
+  <rect x="500" y="439" width="10" height="325" rx="5" fill="#e99635"/>
+  <text class="sans" x="536" y="474" font-size="20" font-weight="700" letter-spacing="1" fill="#a66216">C · CONTRÔLEUR</text>
+  <text class="sans ink card-title" x="536" y="519">Celui qui décide et coordonne</text>
+  <line x1="536" y1="541" x2="1061" y2="541" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans small-label" x="536" y="577" fill="#a66216">DÉFINITION</text>
+  <text class="sans ink body" x="536" y="611">Composant qui reçoit une action et détermine</text>
+  <text class="sans ink body" x="536" y="642">le traitement à effectuer.</text>
+  <text class="sans small-label" x="536" y="677" fill="#a66216">RÔLE</text>
+  <text class="sans ink" x="536" y="710" font-size="22">Interpréter la demande, solliciter le modèle,</text>
+  <text class="sans ink" x="536" y="741" font-size="22">puis choisir une vue ou une autre réponse.</text>
+
+  <!-- Modèle -->
+  <g filter="url(#shadow)"><rect x="80" y="899" width="630" height="330" rx="20" fill="#fff"/></g>
+  <rect x="80" y="899" width="10" height="330" rx="5" fill="#8167c8"/>
+  <text class="sans" x="117" y="936" font-size="20" font-weight="700" letter-spacing="1" fill="#6950b2">M · MODÈLE</text>
+  <text class="sans ink card-title" x="117" y="981">Les données et les règles</text>
+  <line x1="117" y1="1003" x2="670" y2="1003" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans small-label" x="117" y="1039" fill="#6950b2">DÉFINITION</text>
+  <text class="sans ink body" x="117" y="1073">Ensemble des données et des règles qui</text>
+  <text class="sans ink body" x="117" y="1104">décrivent ce que l’application gère.</text>
+  <text class="sans small-label" x="117" y="1141" fill="#6950b2">RÔLE</text>
+  <text class="sans ink" x="117" y="1170" font-size="22">Appliquer les règles métier et communiquer</text>
+  <text class="sans ink" x="117" y="1197" font-size="22">avec le serveur pour accéder aux données.</text>
+
+  <!-- Vue -->
+  <g filter="url(#shadow)"><rect x="890" y="899" width="630" height="330" rx="20" fill="#fff"/></g>
+  <rect x="890" y="899" width="10" height="330" rx="5" fill="#20a393"/>
+  <text class="sans" x="927" y="936" font-size="20" font-weight="700" letter-spacing="1" fill="#147769">V · VUE</text>
+  <text class="sans ink card-title" x="927" y="981">Ce que l’utilisateur voit</text>
+  <line x1="927" y1="1003" x2="1480" y2="1003" stroke="#e4eaf1" stroke-width="2"/>
+  <text class="sans small-label" x="927" y="1039" fill="#147769">DÉFINITION</text>
+  <text class="sans ink body" x="927" y="1073">Représentation des informations destinée</text>
+  <text class="sans ink body" x="927" y="1104">à l’utilisateur.</text>
+  <text class="sans small-label" x="927" y="1141" fill="#147769">RÔLE</text>
+  <text class="sans ink" x="927" y="1170" font-size="22">Produire le code HTML/CSS de la page</text>
+  <text class="sans ink" x="927" y="1197" font-size="22">demandée à partir des données reçues.</text>
+
+  <!-- Parcours : utilisateur -> contrôleur -->
+  <path d="M800 357 V439" fill="none" stroke="#70849e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="824" y="381" width="231" height="35" rx="17" fill="#e8eef5"/>
+  <text class="sans flow" x="842" y="406" fill="#52637a">1 · requête HTTP</text>
+
+  <!-- Parcours : contrôleur <-> modèle -->
+  <path d="M652 764 L441 899" fill="none" stroke="#70849e" stroke-width="3" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+  <rect x="178" y="814" width="291" height="36" rx="18" fill="#f0ebff"/>
+  <text class="sans flow" x="197" y="839" fill="#6950b2">2 · demande / données</text>
+
+  <!-- Parcours : contrôleur -> vue -->
+  <path d="M948 764 L1159 899" fill="none" stroke="#70849e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="1087" y="814" width="317" height="36" rx="18" fill="#e1f6f1"/>
+  <text class="sans flow" x="1106" y="839" fill="#147769">3 · vue et informations</text>
+
+  <!-- Parcours : vue -> utilisateur -->
+  <path d="M1520 1050 H1550 V303 H1040" fill="none" stroke="#20a393" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="1165" y="665" width="377" height="36" rx="18" fill="#e1f6f1"/>
+  <text class="sans flow" x="1184" y="690" fill="#147769">4 · réponse HTTP : HTML/CSS</text>
+
+  <!-- Le serveur de bases de données est extérieur aux trois composants MVC -->
+  <path d="M395 1229 V1360" fill="none" stroke="#70849e" stroke-width="3" marker-start="url(#arrow-start)" marker-end="url(#arrow)"/>
+  <rect x="421" y="1276" width="231" height="36" rx="18" fill="#f0ebff"/>
+  <text class="sans flow" x="440" y="1301" fill="#6950b2">requêtes / résultats</text>
+  <g filter="url(#shadow)"><rect x="80" y="1360" width="630" height="120" rx="20" fill="#fff"/></g>
+  <rect x="80" y="1360" width="10" height="120" rx="5" fill="#94a3b8"/>
+  <text class="sans small-label" x="117" y="1391" fill="#52637a">HORS MVC</text>
+  <text class="sans ink" x="117" y="1426" font-size="29" font-weight="700">Serveur de bases de données</text>
+  <text class="sans muted" x="117" y="1460" font-size="22">Stocke les données de l’application.</text>
+
+</svg>

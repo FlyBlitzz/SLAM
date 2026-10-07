@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2976" viewBox="0 0 1800 2976" role="img" aria-labelledby="title desc">
+<title id="title">BTS SIO · Architecture MVC · Monolithe : création d’un film</title>
+<desc id="desc">Infographie du fichier creer.php de 01-monolithique-ameliore. Tout le code PHP est reproduit, tandis que seuls les passages HTML sont abrégés. Chaque section est encadrée et reliée à son action.</desc>
+<defs><style>.sans{font-family:Arial,Helvetica,sans-serif}.mono{font-family:Menlo,Consolas,monospace}.ink{fill:#14263d}.muted{fill:#52637a}.white{fill:#fff}.code{font-size:21px}</style>
+<filter id="shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1d3556" flood-opacity=".10"/></filter>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#8192a6" stroke-width="2"/></marker></defs>
+<rect width="1800" height="2976" fill="#f3f6fb"/>
+<rect width="1800" height="184" fill="#14263d"/>
+<rect x="70" y="38" width="9" height="108" rx="4" fill="#52c2ae"/>
+<text class="sans white" x="105" y="44" font-size="23" font-weight="700" letter-spacing="1">BTS SIO</text>
+<line x1="232" y1="25" x2="232" y2="50" stroke="#7990ab" stroke-width="2"/>
+<text class="sans" x="255" y="44" font-size="23" font-weight="700" fill="#aee9de" letter-spacing="1">Architecture MVC</text>
+<text class="sans white" x="105" y="100" font-size="43" font-weight="700">Monolithe : création d’un film</text>
+<text class="sans" x="106" y="141" font-size="23" fill="#cdd9e8">Lecture du fichier creer.php · code PHP et responsabilités</text>
+<g transform="translate(1586 14)" role="img" aria-label="Logo MVC : modèle, contrôleur et vue">
+  <rect width="168" height="154" rx="24" fill="#213b5a" stroke="#486887" stroke-width="2"/>
+  <path d="M49 57 L119 57 L84 117 Z" fill="none" stroke="#8ca4ba" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="49" cy="57" r="29" fill="#8167c8"/>
+  <circle cx="119" cy="57" r="29" fill="#e99635"/>
+  <circle cx="84" cy="117" r="29" fill="#20a393"/>
+  <text class="sans white" x="49" y="67" font-size="29" font-weight="700" text-anchor="middle">M</text>
+  <text class="sans white" x="119" y="67" font-size="29" font-weight="700" text-anchor="middle">C</text>
+  <text class="sans white" x="84" y="127" font-size="29" font-weight="700" text-anchor="middle">V</text>
+</g>
+<text class="sans muted" x="72" y="220.0" font-size="21" font-weight="700" letter-spacing="1">CODE SOURCE · NUMÉROS DE LIGNE D’ORIGINE</text>
+<text class="sans muted" x="1220" y="220.0" font-size="21" font-weight="700" letter-spacing="1">CE QUE FAIT LA SECTION</text>
+<line x1="72" y1="237" x2="1729" y2="237" stroke="#cfdae6" stroke-width="2"/>
+<g filter="url(#shadow)"><rect x="70" y="267" width="1095" height="391" rx="17" fill="#fff"/><rect x="1210" y="267" width="520" height="391" rx="17" fill="#fff"/></g>
+<rect x="70" y="267" width="8" height="391" rx="4" fill="#94a3b8"/>
+<rect x="1210" y="267" width="8" height="391" rx="4" fill="#94a3b8"/>
+<rect x="95" y="283" width="243" height="35" rx="17" fill="#edf1f6"/>
+<text class="sans" x="112" y="308.0" font-size="19" font-weight="700" fill="#52637a">SECTION 01 · L 1–11</text>
+<path d="M1174 462.5 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="348.0" font-size="18" >001</text>
+<text class="mono" x="176" y="348.0" font-size="21" fill="#14263d" xml:space="preserve">&lt;?php</text>
+<text class="mono muted" x="96" y="377.0" font-size="18" >002</text>
+<text class="mono muted" x="96" y="406.0" font-size="18" >003</text>
+<text class="mono" x="176" y="406.0" font-size="21" fill="#14263d" xml:space="preserve">// ------------------------------------------------------------</text>
+<text class="mono muted" x="96" y="435.0" font-size="18" >004</text>
+<text class="mono" x="176" y="435.0" font-size="21" fill="#14263d" xml:space="preserve">// APPLICATION MONOLITHIQUE AMÉLIORÉE (SANS MVC)</text>
+<text class="mono muted" x="96" y="464.0" font-size="18" >005</text>
+<text class="mono" x="176" y="464.0" font-size="21" fill="#14263d" xml:space="preserve">// Page : Création d&#x27;un film</text>
+<text class="mono muted" x="96" y="493.0" font-size="18" >006</text>
+<text class="mono" x="176" y="493.0" font-size="21" fill="#14263d" xml:space="preserve">// ------------------------------------------------------------</text>
+<text class="mono muted" x="96" y="522.0" font-size="18" >007</text>
+<text class="mono" x="176" y="522.0" font-size="21" fill="#14263d" xml:space="preserve">// Cette page gère à la fois l&#x27;affichage du formulaire et</text>
+<text class="mono muted" x="96" y="551.0" font-size="18" >008</text>
+<text class="mono" x="176" y="551.0" font-size="21" fill="#14263d" xml:space="preserve">// le traitement de la soumission POST.</text>
+<text class="mono muted" x="96" y="580.0" font-size="18" >009</text>
+<text class="mono" x="176" y="580.0" font-size="21" fill="#14263d" xml:space="preserve">// Elle réutilise la connexion PDO via db.php et redirige</text>
+<text class="mono muted" x="96" y="609.0" font-size="18" >010</text>
+<text class="mono" x="176" y="609.0" font-size="21" fill="#14263d" xml:space="preserve">// vers index.php (liste) après insertion réussie (pattern PRG).</text>
+<text class="mono muted" x="96" y="638.0" font-size="18" >011</text>
+<text class="mono" x="176" y="638.0" font-size="21" fill="#14263d" xml:space="preserve">// ------------------------------------------------------------</text>
+<text class="sans" x="1238" y="377.0" font-size="19" font-weight="700" letter-spacing="1" fill="#52637a">COMMENTAIRES</text>
+<text class="sans ink" x="1238" y="420.0" font-size="29" font-weight="700">Présentation du fichier</text>
+<text class="sans muted" x="1238" y="458.0" font-size="21" >Les commentaires décrivent le</text>
+<text class="sans muted" x="1238" y="492.0" font-size="21" >formulaire et le parcours après</text>
+<text class="sans muted" x="1238" y="526.0" font-size="21" >l&#x27;insertion. Aucun traitement n&#x27;est</text>
+<text class="sans muted" x="1238" y="560.0" font-size="21" >exécuté.</text>
+<g filter="url(#shadow)"><rect x="70" y="678" width="1095" height="246" rx="17" fill="#fff"/><rect x="1210" y="678" width="520" height="246" rx="17" fill="#fff"/></g>
+<rect x="70" y="678" width="8" height="246" rx="4" fill="#3986dc"/>
+<rect x="1210" y="678" width="8" height="246" rx="4" fill="#3986dc"/>
+<rect x="95" y="694" width="243" height="35" rx="17" fill="#e6f2ff"/>
+<text class="sans" x="112" y="719.0" font-size="19" font-weight="700" fill="#2766ad">SECTION 02 · L 13–18</text>
+<path d="M1174 801.0 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="759.0" font-size="18" >013</text>
+<text class="mono" x="176" y="759.0" font-size="21" fill="#14263d" xml:space="preserve">// 1. Inclusion de la connexion à la base de données</text>
+<text class="mono muted" x="96" y="788.0" font-size="18" >014</text>
+<text class="mono" x="176" y="788.0" font-size="21" fill="#14263d" xml:space="preserve">require_once __DIR__ . &#x27;/db.php&#x27;;</text>
+<text class="mono muted" x="96" y="817.0" font-size="18" >015</text>
+<text class="mono muted" x="96" y="846.0" font-size="18" >016</text>
+<text class="mono" x="176" y="846.0" font-size="21" fill="#14263d" xml:space="preserve">$errors = [];</text>
+<text class="mono muted" x="96" y="875.0" font-size="18" >017</text>
+<text class="mono" x="176" y="875.0" font-size="21" fill="#14263d" xml:space="preserve">$titre = &#x27;&#x27;;</text>
+<text class="mono muted" x="96" y="904.0" font-size="18" >018</text>
+<text class="mono" x="176" y="904.0" font-size="21" fill="#14263d" xml:space="preserve">$realisateur = &#x27;&#x27;;</text>
+<text class="sans" x="1238" y="733.0" font-size="19" font-weight="700" letter-spacing="1" fill="#2766ad">PRÉPARATION</text>
+<text class="sans ink" x="1238" y="776.0" font-size="29" font-weight="700">Préparation</text>
+<text class="sans muted" x="1238" y="814.0" font-size="21" >Le fichier charge PDO, crée le tableau</text>
+<text class="sans muted" x="1238" y="848.0" font-size="21" >d&#x27;erreurs et initialise les deux champs</text>
+<text class="sans muted" x="1238" y="882.0" font-size="21" >à vide.</text>
+<g filter="url(#shadow)"><rect x="70" y="944" width="1095" height="216" rx="17" fill="#fff"/><rect x="1210" y="944" width="520" height="216" rx="17" fill="#fff"/></g>
+<rect x="70" y="944" width="8" height="216" rx="4" fill="#e99635"/>
+<rect x="1210" y="944" width="8" height="216" rx="4" fill="#e99635"/>
+<rect x="95" y="960" width="243" height="35" rx="17" fill="#fff1df"/>
+<text class="sans" x="112" y="985.0" font-size="19" font-weight="700" fill="#a66216">SECTION 03 · L 20–23</text>
+<path d="M1174 1052.0 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="1025.0" font-size="18" >020</text>
+<text class="mono" x="176" y="1025.0" font-size="21" fill="#14263d" xml:space="preserve">// 2. Traitement de la soumission du formulaire</text>
+<text class="mono muted" x="96" y="1054.0" font-size="18" >021</text>
+<text class="mono" x="176" y="1054.0" font-size="21" fill="#14263d" xml:space="preserve">if (($_SERVER[&#x27;REQUEST_METHOD&#x27;] ?? &#x27;&#x27;) === &#x27;POST&#x27;) {</text>
+<text class="mono muted" x="96" y="1083.0" font-size="18" >022</text>
+<text class="mono" x="176" y="1083.0" font-size="21" fill="#14263d" xml:space="preserve">    $titre = trim($_POST[&#x27;titre&#x27;] ?? &#x27;&#x27;);</text>
+<text class="mono muted" x="96" y="1112.0" font-size="18" >023</text>
+<text class="mono" x="176" y="1112.0" font-size="21" fill="#14263d" xml:space="preserve">    $realisateur = trim($_POST[&#x27;realisateur&#x27;] ?? &#x27;&#x27;);</text>
+<text class="sans" x="1238" y="987.0" font-size="19" font-weight="700" letter-spacing="1" fill="#a66216">REQUÊTE ET DÉCISION</text>
+<text class="sans ink" x="1238" y="1030.0" font-size="29" font-weight="700">Lecture du formulaire</text>
+<text class="sans muted" x="1238" y="1068.0" font-size="21" >Le traitement démarre seulement en</text>
+<text class="sans muted" x="1238" y="1102.0" font-size="21" >POST. trim() enlève les espaces autour</text>
+<text class="sans muted" x="1238" y="1136.0" font-size="21" >des deux valeurs reçues.</text>
+<g filter="url(#shadow)"><rect x="70" y="1180" width="1095" height="304" rx="17" fill="#fff"/><rect x="1210" y="1180" width="520" height="304" rx="17" fill="#fff"/></g>
+<rect x="70" y="1180" width="8" height="304" rx="4" fill="#e99635"/>
+<rect x="1210" y="1180" width="8" height="304" rx="4" fill="#e99635"/>
+<rect x="95" y="1196" width="243" height="35" rx="17" fill="#fff1df"/>
+<text class="sans" x="112" y="1221.0" font-size="19" font-weight="700" fill="#a66216">SECTION 04 · L 25–32</text>
+<path d="M1174 1332.0 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="1261.0" font-size="18" >025</text>
+<text class="mono" x="176" y="1261.0" font-size="21" fill="#14263d" xml:space="preserve">    // Validation des données</text>
+<text class="mono muted" x="96" y="1290.0" font-size="18" >026</text>
+<text class="mono" x="176" y="1290.0" font-size="21" fill="#14263d" xml:space="preserve">    if ($titre === &#x27;&#x27;) {</text>
+<text class="mono muted" x="96" y="1319.0" font-size="18" >027</text>
+<text class="mono" x="176" y="1319.0" font-size="21" fill="#14263d" xml:space="preserve">        $errors[] = &#x27;Le titre est obligatoire.&#x27;;</text>
+<text class="mono muted" x="96" y="1348.0" font-size="18" >028</text>
+<text class="mono" x="176" y="1348.0" font-size="21" fill="#14263d" xml:space="preserve">    }</text>
+<text class="mono muted" x="96" y="1377.0" font-size="18" >029</text>
+<text class="mono muted" x="96" y="1406.0" font-size="18" >030</text>
+<text class="mono" x="176" y="1406.0" font-size="21" fill="#14263d" xml:space="preserve">    if ($realisateur === &#x27;&#x27;) {</text>
+<text class="mono muted" x="96" y="1435.0" font-size="18" >031</text>
+<text class="mono" x="176" y="1435.0" font-size="21" fill="#14263d" xml:space="preserve">        $errors[] = &#x27;Le réalisateur est obligatoire.&#x27;;</text>
+<text class="mono muted" x="96" y="1464.0" font-size="18" >032</text>
+<text class="mono" x="176" y="1464.0" font-size="21" fill="#14263d" xml:space="preserve">    }</text>
+<text class="sans" x="1238" y="1264.0" font-size="19" font-weight="700" letter-spacing="1" fill="#a66216">REQUÊTE ET DÉCISION</text>
+<text class="sans ink" x="1238" y="1307.0" font-size="29" font-weight="700">Validation</text>
+<text class="sans muted" x="1238" y="1345.0" font-size="21" >Deux tests vérifient que le titre et le</text>
+<text class="sans muted" x="1238" y="1379.0" font-size="21" >réalisateur ne sont pas vides ; sinon</text>
+<text class="sans muted" x="1238" y="1413.0" font-size="21" >un message est ajouté à $errors.</text>
+<g filter="url(#shadow)"><rect x="70" y="1504" width="1095" height="420" rx="17" fill="#fff"/><rect x="1210" y="1504" width="520" height="420" rx="17" fill="#fff"/></g>
+<rect x="70" y="1504" width="8" height="420" rx="4" fill="#8167c8"/>
+<rect x="1210" y="1504" width="8" height="420" rx="4" fill="#8167c8"/>
+<rect x="95" y="1520" width="243" height="35" rx="17" fill="#f0ebff"/>
+<text class="sans" x="112" y="1545.0" font-size="19" font-weight="700" fill="#6950b2">SECTION 05 · L 34–45</text>
+<path d="M1174 1714.0 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="1585.0" font-size="18" >034</text>
+<text class="mono" x="176" y="1585.0" font-size="21" fill="#14263d" xml:space="preserve">    // Si aucune erreur, enregistrement en base de données</text>
+<text class="mono muted" x="96" y="1614.0" font-size="18" >035</text>
+<text class="mono" x="176" y="1614.0" font-size="21" fill="#14263d" xml:space="preserve">    if ($errors === []) {</text>
+<text class="mono muted" x="96" y="1643.0" font-size="18" >036</text>
+<text class="mono" x="176" y="1643.0" font-size="21" fill="#14263d" xml:space="preserve">        $sql = &#x27;</text>
+<text class="mono muted" x="96" y="1672.0" font-size="18" >037</text>
+<text class="mono" x="176" y="1672.0" font-size="21" fill="#14263d" xml:space="preserve">            INSERT INTO films (titre, realisateur)</text>
+<text class="mono muted" x="96" y="1701.0" font-size="18" >038</text>
+<text class="mono" x="176" y="1701.0" font-size="21" fill="#14263d" xml:space="preserve">            VALUES (:titre, :realisateur)</text>
+<text class="mono muted" x="96" y="1730.0" font-size="18" >039</text>
+<text class="mono" x="176" y="1730.0" font-size="21" fill="#14263d" xml:space="preserve">        &#x27;;</text>
+<text class="mono muted" x="96" y="1759.0" font-size="18" >040</text>
+<text class="mono muted" x="96" y="1788.0" font-size="18" >041</text>
+<text class="mono" x="176" y="1788.0" font-size="21" fill="#14263d" xml:space="preserve">        $stmt = $pdo-&gt;prepare($sql);</text>
+<text class="mono muted" x="96" y="1817.0" font-size="18" >042</text>
+<text class="mono" x="176" y="1817.0" font-size="21" fill="#14263d" xml:space="preserve">        $stmt-&gt;execute([</text>
+<text class="mono muted" x="96" y="1846.0" font-size="18" >043</text>
+<text class="mono" x="176" y="1846.0" font-size="21" fill="#14263d" xml:space="preserve">            &#x27;titre&#x27; =&gt; $titre,</text>
+<text class="mono muted" x="96" y="1875.0" font-size="18" >044</text>
+<text class="mono" x="176" y="1875.0" font-size="21" fill="#14263d" xml:space="preserve">            &#x27;realisateur&#x27; =&gt; $realisateur,</text>
+<text class="mono muted" x="96" y="1904.0" font-size="18" >045</text>
+<text class="mono" x="176" y="1904.0" font-size="21" fill="#14263d" xml:space="preserve">        ]);</text>
+<text class="sans" x="1238" y="1646.0" font-size="19" font-weight="700" letter-spacing="1" fill="#6950b2">DONNÉES</text>
+<text class="sans ink" x="1238" y="1689.0" font-size="29" font-weight="700">Insertion en base</text>
+<text class="sans muted" x="1238" y="1727.0" font-size="21" >Si $errors est vide, une requête</text>
+<text class="sans muted" x="1238" y="1761.0" font-size="21" >préparée INSERT enregistre le titre et</text>
+<text class="sans muted" x="1238" y="1795.0" font-size="21" >le réalisateur.</text>
+<g filter="url(#shadow)"><rect x="70" y="1944" width="1095" height="250" rx="17" fill="#fff"/><rect x="1210" y="1944" width="520" height="250" rx="17" fill="#fff"/></g>
+<rect x="70" y="1944" width="8" height="250" rx="4" fill="#e99635"/>
+<rect x="1210" y="1944" width="8" height="250" rx="4" fill="#e99635"/>
+<rect x="95" y="1960" width="243" height="35" rx="17" fill="#fff1df"/>
+<text class="sans" x="112" y="1985.0" font-size="19" font-weight="700" fill="#a66216">SECTION 06 · L 47–51</text>
+<path d="M1174 2069.0 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="2025.0" font-size="18" >047</text>
+<text class="mono" x="176" y="2025.0" font-size="21" fill="#14263d" xml:space="preserve">        // Redirection vers la liste des films (Post-Redirect-Get)</text>
+<text class="mono muted" x="96" y="2054.0" font-size="18" >048</text>
+<text class="mono" x="176" y="2054.0" font-size="21" fill="#14263d" xml:space="preserve">        header(&#x27;Location: index.php?created=1&#x27;);</text>
+<text class="mono muted" x="96" y="2083.0" font-size="18" >049</text>
+<text class="mono" x="176" y="2083.0" font-size="21" fill="#14263d" xml:space="preserve">        exit;</text>
+<text class="mono muted" x="96" y="2112.0" font-size="18" >050</text>
+<text class="mono" x="176" y="2112.0" font-size="21" fill="#14263d" xml:space="preserve">    }</text>
+<text class="mono muted" x="96" y="2141.0" font-size="18" >051</text>
+<text class="mono" x="176" y="2141.0" font-size="21" fill="#14263d" xml:space="preserve">}</text>
+<text class="sans" x="1238" y="1987.0" font-size="19" font-weight="700" letter-spacing="1" fill="#a66216">REQUÊTE ET DÉCISION</text>
+<text class="sans ink" x="1238" y="2030.0" font-size="29" font-weight="700">Redirection après succès</text>
+<text class="sans muted" x="1238" y="2068.0" font-size="21" >Après l&#x27;insertion, Location renvoie</text>
+<text class="sans muted" x="1238" y="2102.0" font-size="21" >vers la liste et exit arrête le script.</text>
+<text class="sans muted" x="1238" y="2136.0" font-size="21" >Le rafraîchissement de la liste ne</text>
+<text class="sans muted" x="1238" y="2170.0" font-size="21" >renvoie pas le POST.</text>
+<g filter="url(#shadow)"><rect x="70" y="2214" width="1095" height="571" rx="17" fill="#fff"/><rect x="1210" y="2214" width="520" height="571" rx="17" fill="#fff"/></g>
+<rect x="70" y="2214" width="8" height="571" rx="4" fill="#20a393"/>
+<rect x="1210" y="2214" width="8" height="571" rx="4" fill="#20a393"/>
+<rect x="95" y="2230" width="274" height="35" rx="17" fill="#e1f6f1"/>
+<text class="sans" x="112" y="2255" font-size="19" font-weight="700" fill="#147769">SECTION 07 · L 53–127</text>
+<path d="M1174 2499 H1196" stroke="#8192a6" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text class="mono muted" x="96" y="2295" font-size="18" >053</text>
+<text class="mono" x="176" y="2295" font-size="21" fill="#14263d" xml:space="preserve">?&gt;</text>
+<text class="mono muted" x="96" y="2324" font-size="18" >054–083</text>
+<text class="mono" x="176" y="2324" font-size="21" fill="#728197" xml:space="preserve">… HTML : document, CSS, en-tête, navigation et titre …</text>
+<text class="mono muted" x="96" y="2353" font-size="18" >084</text>
+<text class="mono" x="176" y="2353" font-size="21" fill="#14263d" xml:space="preserve">        &lt;?php if ($errors !== []): ?&gt;</text>
+<text class="mono muted" x="96" y="2382" font-size="18" >085–087</text>
+<text class="mono" x="176" y="2382" font-size="21" fill="#728197" xml:space="preserve">… HTML : encadré et début de liste …</text>
+<text class="mono muted" x="96" y="2411" font-size="18" >088</text>
+<text class="mono" x="176" y="2411" font-size="21" fill="#14263d" xml:space="preserve">                    &lt;?php foreach ($errors as $error): ?&gt;</text>
+<text class="mono muted" x="96" y="2440" font-size="18" >089</text>
+<text class="mono" x="176" y="2440" font-size="21" fill="#14263d" xml:space="preserve">                        &lt;li&gt;&lt;?= htmlspecialchars($error) ?&gt;&lt;/li&gt;</text>
+<text class="mono muted" x="96" y="2469" font-size="18" >090</text>
+<text class="mono" x="176" y="2469" font-size="21" fill="#14263d" xml:space="preserve">                    &lt;?php endforeach; ?&gt;</text>
+<text class="mono muted" x="96" y="2498" font-size="18" >091–092</text>
+<text class="mono" x="176" y="2498" font-size="21" fill="#728197" xml:space="preserve">… HTML : fin de liste et d&#x27;encadré …</text>
+<text class="mono muted" x="96" y="2527" font-size="18" >093</text>
+<text class="mono" x="176" y="2527" font-size="21" fill="#14263d" xml:space="preserve">        &lt;?php endif; ?&gt;</text>
+<text class="mono muted" x="96" y="2556" font-size="18" >095</text>
+<text class="mono" x="176" y="2556" font-size="21" fill="#14263d" xml:space="preserve">        &lt;form method=&quot;POST&quot; action=&quot;creer.php&quot; class=&quot;card-form&quot;&gt;</text>
+<text class="mono muted" x="96" y="2585" font-size="18" >096–101</text>
+<text class="mono" x="176" y="2585" font-size="21" fill="#728197" xml:space="preserve">… HTML : champ du titre …</text>
+<text class="mono muted" x="96" y="2614" font-size="18" >102</text>
+<text class="mono" x="176" y="2614" font-size="21" fill="#14263d" xml:space="preserve">&lt;?= htmlspecialchars($titre) ?&gt;</text>
+<text class="mono muted" x="96" y="2643" font-size="18" >103–112</text>
+<text class="mono" x="176" y="2643" font-size="21" fill="#728197" xml:space="preserve">… HTML : fin du titre et champ du réalisateur …</text>
+<text class="mono muted" x="96" y="2672" font-size="18" >113</text>
+<text class="mono" x="176" y="2672" font-size="21" fill="#14263d" xml:space="preserve">&lt;?= htmlspecialchars($realisateur) ?&gt;</text>
+<text class="mono muted" x="96" y="2701" font-size="18" >114–122</text>
+<text class="mono" x="176" y="2701" font-size="21" fill="#728197" xml:space="preserve">… HTML : boutons et fin du formulaire …</text>
+<text class="mono muted" x="96" y="2730" font-size="18" >123–127</text>
+<text class="mono" x="176" y="2730" font-size="21" fill="#728197" xml:space="preserve">… HTML : fermeture de &lt;main&gt;, &lt;body&gt; et &lt;html&gt; …</text>
+<text class="sans" x="1238" y="2292" font-size="19" font-weight="700" letter-spacing="1" fill="#147769">PRÉSENTATION</text>
+<text class="sans ink" x="1238" y="2337" font-size="29" font-weight="700">Génération de la page HTML</text>
+<text class="sans muted" x="1238" y="2390" font-size="21">Le document charge le CSS et affiche</text>
+<text class="sans muted" x="1238" y="2424" font-size="21">l’en-tête, la navigation et le titre.</text>
+<text class="sans muted" x="1238" y="2490" font-size="21">Les erreurs éventuelles sont affichées</text>
+<text class="sans muted" x="1238" y="2524" font-size="21">après échappement HTML.</text>
+<text class="sans muted" x="1238" y="2590" font-size="21">Le formulaire envoie un POST et</text>
+<text class="sans muted" x="1238" y="2624" font-size="21">réaffiche les valeurs saisies.</text>
+<text class="sans muted" x="1238" y="2690" font-size="21">Les balises finales ferment la page.</text>
+<rect x="70" y="2821" width="1660" height="133" rx="17" fill="#fff"/>
+<text class="sans ink" x="103" y="2862" font-size="25" font-weight="700">Légende des couleurs</text>
+<rect x="103" y="2893" width="24" height="24" rx="5" fill="#94a3b8"/>
+<text class="sans ink" x="139" y="2913" font-size="21">Commentaires</text>
+<rect x="423" y="2893" width="24" height="24" rx="5" fill="#3986dc"/>
+<text class="sans ink" x="459" y="2913" font-size="21">Préparation</text>
+<rect x="743" y="2893" width="24" height="24" rx="5" fill="#8167c8"/>
+<text class="sans ink" x="779" y="2913" font-size="21">Données</text>
+<rect x="1063" y="2893" width="24" height="24" rx="5" fill="#e99635"/>
+<text class="sans ink" x="1099" y="2913" font-size="21">Requête et décision</text>
+<rect x="1383" y="2893" width="24" height="24" rx="5" fill="#20a393"/>
+<text class="sans ink" x="1419" y="2913" font-size="21">Présentation</text>
+</svg>

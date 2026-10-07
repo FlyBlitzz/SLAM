@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Films</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header>
+            <h1>🎬 Gestionnaire de films</h1>
+            <p>Ajoutez des films à votre collection.</p>
+        </header>
+
+        <main>
+            <!-- Formulaire d'ajout -->
+            <section class="form-section">
+                <h2>Ajouter un film</h2>
+                <form id="filmForm">
+                    <!-- Titre -->
+                    <div class="form-group">
+                        <label for="titre">Titre</label>
+                        <input type="text" id="titre" name="titre" placeholder="Entrez le titre du film">
+                        <span class="error-message" id="erreurTitre"></span>
+                    </div>
+
+                    <!-- Réalisateur -->
+                    <div class="form-group">
+                        <label for="realisateur">Réalisateur</label>
+                        <input type="text" id="realisateur" name="realisateur"
+                            placeholder="Entrez le nom du réalisateur">
+                        <span class="error-message" id="erreurRealisateur"></span>
+                    </div>
+
+                    <!-- Année -->
+                    <div class="form-group">
+                        <label for="annee">Année de sortie</label>
+                        <input type="number" id="annee" name="annee" placeholder="Entrez l'année de sortie">
+                        <span class="error-message" id="erreurAnnee"></span>
+                    </div>
+
+                    <!-- Durée -->
+                    <div class="form-group">
+                        <label for="duree">Durée (minutes)</label>
+                        <input type="number" id="duree" name="duree" placeholder="Entrez la durée en minutes">
+                        <span class="error-message" id="erreurDuree"></span>
+                    </div>
+
+                    <!-- Genre -->
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select id="genre" name="genre">
+                            <option value="">-- Choisir un genre --</option>
+                            <option value="Action">Action</option>
+                            <option value="Comédie">Comédie</option>
+                            <option value="Drame">Drame</option>
+                            <option value="Science-fiction">Science-fiction</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Animation">Animation</option>
+                        </select>
+                        <span class="error-message" id="erreurGenre"></span>
+                    </div>
+
+                    <!-- Boutons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Ajouter le film</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Collection de films -->
+            <section class="collection-section">
+                <div class="collection-header">
+                    <h2>Films enregistrés</h2>
+                    <button id="deleteAllBtn" class="btn btn-secondary">Tout supprimer</button>
+                </div>
+                <div id="filmsList" class="films-list">
+                    <p class="empty-message">Aucun film enregistré.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
