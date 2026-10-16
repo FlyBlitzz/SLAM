@@ -284,7 +284,7 @@ filterBar.addEventListener("click", (event) => {
   // Mise à jour visuelle du bouton actif
   updateActiveFilterButton(filtreActif);
 
-  // Recalcul et réaffichage immédiat
+  // Recalcule et réaffichage immédiat
   renderBugs();
 });
 
@@ -397,3 +397,213 @@ document.addEventListener("DOMContentLoaded", () => {
   // Premier rendu à partir des données prédéfinies
   renderBugs();
 });
+
+/**
+1) État initial et variables globales
+- bugs : tableau d’objets représentant les anomalies de départ.
+- filtreActif : le filtre courant, par exemple "Tous", "Critique", "Moyenne", "Basse".
+- rechercheTerme : texte actuellement saisi dans la recherche.
+
+Ces variables sont le cœur de l’application. Elles représentent l’état de l’application, et la vue est recalculée à chaque modification.
+
+2) Sélection du DOM
+Le script récupère des éléments HTML du document :
+- bugGrid : conteneur où les cartes sont affichées
+- counterBugs : compteur de bugs visibles
+- totalBountyEl : total de la cagnotte
+- filterBar : barre des filtres
+- bugForm : formulaire d’ajout
+- searchInput : champ de recherche
+- btnClearSearch : bouton de remise à zéro
+
+3) escapeHTML(str)
+But :
+- sécuriser les textes avant de les injecter dans le HTML avec innerHTML.
+
+Rôle :
+- remplace les caractères HTML dangereux par des entités :
+  - & => &amp;
+  - < => &lt;
+  - > => &gt;
+  - " => &quot;
+  - ' => &#039;
+
+Pourquoi c’est important :
+- évite les failles XSS si un utilisateur entre du texte contenant du HTML ou du JavaScript.
+
+4) showToast(message, type)
+But :
+- afficher une notification visuelle de type "succès" ou "résolution".
+
+Détail :
+- vérifie s’il existe déjà un conteneur .toast-container
+- sinon, en crée un
+- crée un élément div de toast
+- injecte un emoji et le message
+- l’ajoute au DOM
+- puis l’efface automatiquement après 3,2 secondes avec un effet de disparition
+
+Exemple :
+- "Anomalie enregistrée avec succès !"
+- "Anomalie éliminée de la prod !"
+
+5) renderBugs()
+C’est la fonction centrale du script.
+
+Elle :
+- applique les filtres,
+- recalcule le nombre de résultats,
+- calcule la cagnotte totale,
+- gère l’état vide,
+- génère les cartes HTML,
+- et les injecte dans le DOM.
+
+Étape 1 : filtrage
+- si filtreActif est "Tous", on prend tous les bugs
+- sinon, on ne garde que ceux dont severite correspond au filtre
+
+Ensuite :
+- si rechercheTerme n’est pas vide, on filtre aussi par :
+  - titre
+  - description
+  - auteur
+
+Cela donne un tableau bugsFiltres qui est une copie filtrée de bugs, sans modifier le tableau original. C’est la logique “non destructif”.
+
+Étape 2 : compteur et cagnotte
+- counterBugs.textContent = bugsFiltres.length
+- totalBounty = bugsFiltres.reduce(...)
+- reduce() additionne toutes les récompenses des bugs visibles
+- totalBountyEl affiche la somme avec le bon format FR : ex. 245 pts => "245"
+
+Étape 3 : cas “aucun résultat”
+Si aucun bug ne correspond :
+- on remplace le contenu de bugGrid par un état vide
+- avec message :
+  - “Aucune anomalie mystique détectée”
+- on affiche un bouton “Réinitialiser les filtres”
+
+Ce bouton appelle :
+- filtreActif = "Tous"
+- rechercheTerme = ""
+- remise du champ de recherche à zéro
+- mise à jour du bouton actif
+- renderBugs()
+
+Étape 4 : génération des cartes
+Ensuite, on fait :
+- bugsFiltres.map(...)
+- chaque bug devient une chaîne HTML représentant une carte
+
+Chaque carte contient :
+- le niveau de sévérité avec badge
+- la prime
+- le titre
+- la description
+- l’auteur
+- l’identifiant
+- un bouton "Résoudre"
+
+Puis :
+- .join("") réunit toute la chaîne
+- bugGrid.innerHTML = cardsHtml injecte le rendu final dans le DOM
+
+Cette technique est appelée “génération déclarative” : on construit le HTML sous forme de données, puis on l’insère d’un coup.
+
+6) updateActiveFilterButton(filterValue)
+But :
+- mettre à jour visuellement le filtre actif dans la barre.
+
+Rôle :
+- sélectionne tous les boutons .btn-filter
+- compare leur data-filter avec le filtre courant
+- ajoute la classe active sur le bon bouton
+- retire active sur les autres
+
+C’est ce qui permet de montrer visuellement quel filtre est sélectionné.
+
+7) filterBar.addEventListener("click", ...)
+C’est de la délégation d’événements.
+Au lieu d’ajouter un écouteur à chaque bouton, on écoute le conteneur parent.
+
+Processus :
+- on vérifie si le clic vient d’un bouton .btn-filter
+- on récupère sa valeur data-filter
+- on met filtreActif à cette valeur
+- on appelle updateActiveFilterButton()
+- puis renderBugs()
+
+C’est optimal : un seul écouteur pour tous les filtres.
+
+8) searchInput.addEventListener("input", ...)
+Quand l’utilisateur tape dans le champ de recherche :
+- on met rechercheTerme = event.target.value
+- on affiche ou masque le bouton de suppression
+- on relance renderBugs()
+
+Donc la recherche est dynamique : à chaque lettre tapée, l’affichage se met à jour.
+
+9) btnClearSearch.addEventListener("click", ...)
+Quand on clique sur le bouton "effacer la recherche" :
+- vide le champ
+- remet rechercheTerme à ""
+- cache le bouton
+- replace le focus dans le champ
+- relance renderBugs()
+
+10) bugForm.addEventListener("submit", ...)
+C’est le formulaire d’ajout d’une anomalie.
+
+Processus :
+- event.preventDefault() pour empêcher le rechargement de page
+- lire les champs :
+  - titre
+  - auteur
+  - sévérité
+  - récompense
+  - description
+- trim() pour supprimer les espaces
+- validation minimale :
+  - titre et auteur obligatoires
+  - sinon alert("Veuillez renseigner ...")
+
+Ensuite :
+- on crée un nouvel objet avec :
+  - id: Date.now()
+  - titre
+  - auteur
+  - severite
+  - description ou texte par défaut
+  - recompense
+
+Puis :
+- bugs.push(newBug) ajoute l’objet au tableau
+- bugForm.reset() vide le formulaire
+- recompenseInput.value = "50" remet une valeur par défaut
+- showToast(...) affiche une notification
+- renderBugs() rafraîchit l’affichage
+
+Cette fonction est le point d’entrée de la création de données.
+
+11) bugGrid.addEventListener("click", ...)
+C’est aussi une délégation d’événements, cette fois pour les boutons “Résoudre”.
+
+Processus :
+- on vérifie si le clic vient d’un bouton .btn-resolve
+- on récupère l’identifiant depuis data-id
+- on trouve l’index du bug dans bugs avec findIndex
+- si trouvé :
+  - on garde une copie du bug supprimé
+  - on le retire du tableau avec splice()
+  - on affiche une notification de suppression
+  - on relance renderBugs()
+
+Le point important est que le clic est capté sur le conteneur global, pas sur chaque bouton individuellement.
+
+12) document.addEventListener("DOMContentLoaded", ...)
+C’est l’initialisation finale.
+Quand la page est complètement chargée :
+- on exécute renderBugs() une première fois
+
+Cela affiche les anomalies initiales présentes dans bugs.
+*/

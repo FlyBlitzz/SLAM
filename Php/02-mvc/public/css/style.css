@@ -114,6 +114,11 @@ nav.nav-bar a.active {
     color: #1e293b;
 }
 
+.btn-danger {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
 /* Alertes & Notifications */
 .alert {
     padding: 1rem;

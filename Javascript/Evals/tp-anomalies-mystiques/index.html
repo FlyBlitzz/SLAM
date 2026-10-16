@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlitchZero — Registre des Anomalies Mystiques</title>
-  <meta name="description" content="Application de gestion de la dette technique mystique et des bugs légendaires de la startup GlitchZero.">
-  
+  <meta name="description"
+    content="Application de gestion de la dette technique mystique et des bugs légendaires de la startup GlitchZero.">
+
   <!-- Polices Google Fonts modernes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Conteneur global avec fond étoilé / mystique -->
   <div class="app-wrapper">
-    
+
     <!-- BANDEAU D'EN-TÊTE SÉMANTIQUE -->
     <header class="main-header">
       <div class="header-branding">
@@ -52,7 +57,7 @@
 
     <!-- ZONE PRINCIPALE SÉMANTIQUE -->
     <main class="main-layout">
-      
+
       <!-- COLONNE 1 : FORMULAIRE D'AJOUT -->
       <aside class="sidebar-section">
         <section class="form-container">
@@ -66,14 +71,8 @@
               <label for="bug-titre" class="form-label">
                 Titre de l'anomalie <span class="required">*</span>
               </label>
-              <input 
-                type="text" 
-                id="bug-titre" 
-                name="titre" 
-                class="form-control" 
-                placeholder="Ex: Le CSS fantôme de 3h du matin..." 
-                required
-              >
+              <input type="text" id="bug-titre" name="titre" class="form-control"
+                placeholder="Ex: Le CSS fantôme de 3h du matin..." required>
             </div>
 
             <div class="form-row">
@@ -81,14 +80,8 @@
                 <label for="bug-auteur" class="form-label">
                   Auteur / Déclarant <span class="required">*</span>
                 </label>
-                <input 
-                  type="text" 
-                  id="bug-auteur" 
-                  name="auteur" 
-                  class="form-control" 
-                  placeholder="Ex: Alexandre" 
-                  required
-                >
+                <input type="text" id="bug-auteur" name="auteur" class="form-control" placeholder="Ex: Alexandre"
+                  required>
               </div>
 
               <div class="form-group">
@@ -108,16 +101,8 @@
                 Récompense fictive (pts)
               </label>
               <div class="input-with-icon">
-                <input 
-                  type="number" 
-                  id="bug-recompense" 
-                  name="recompense" 
-                  class="form-control" 
-                  min="0" 
-                  step="5" 
-                  placeholder="Ex: 100"
-                  value="50"
-                >
+                <input type="number" id="bug-recompense" name="recompense" class="form-control" min="0" step="5"
+                  placeholder="Ex: 100" value="50">
                 <span class="input-icon">⚡</span>
               </div>
             </div>
@@ -126,13 +111,8 @@
               <label for="bug-description" class="form-label">
                 Description du phénomène
               </label>
-              <textarea 
-                id="bug-description" 
-                name="description" 
-                class="form-control textarea" 
-                rows="4" 
-                placeholder="Décrivez les conditions surnaturelles d'apparition du bug..."
-              ></textarea>
+              <textarea id="bug-description" name="description" class="form-control textarea" rows="4"
+                placeholder="Décrivez les conditions surnaturelles d'apparition du bug..."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary submit-btn">
@@ -145,23 +125,20 @@
 
       <!-- COLONNE 2 : RECHERCHE, FILTRES & GRILLE DE CARTES -->
       <section class="content-section">
-        
+
         <!-- BARRE DE CONTRÔLES (RECHERCHE BONUS & FILTRES SÉVÉRITÉ) -->
         <div class="controls-card">
           <!-- CHAMP DE RECHERCHE TEXTUELLE (BONUS) -->
           <div class="search-box">
-            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input 
-              type="text" 
-              id="search-input" 
-              class="search-input" 
-              placeholder="Recherche par mot-clé (titre, description)..."
-              aria-label="Recherche textuelle d'anomalies"
-            >
-            <button type="button" id="btn-clear-search" class="clear-search-btn" title="Effacer la recherche" hidden>&times;</button>
+            <input type="text" id="search-input" class="search-input"
+              placeholder="Recherche par mot-clé (titre, description)..." aria-label="Recherche textuelle d'anomalies">
+            <button type="button" id="btn-clear-search" class="clear-search-btn" title="Effacer la recherche"
+              hidden>&times;</button>
           </div>
 
           <!-- BARRE DE FILTRAGE DES 4 BOUTONS -->
@@ -204,4 +181,183 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
+
+<!--
+1) Doctype et structure globale
+- <!DOCTYPE html> : indique que le document est en HTML5.
+- <html lang="fr"> : spécifie que le contenu est en français.
+- <head> : contient les métadonnées et les fichiers CSS/JS externes.
+- <body> : contient tout le contenu visible de la page.
+
+2) <head>
+a) Encodage et viewport
+- <meta charset="UTF-8"> : garantit l’affichage correct des caractères accentués.
+- <meta name="viewport" content="width=device-width, initial-scale=1.0"> : permet un rendu adapté aux mobiles.
+
+b) Titre de la page
+- <title>GlitchZero — Registre des Anomalies Mystiques</title>
+- C’est ce qui apparait dans l’onglet du navigateur.
+
+c) Description SEO
+- <meta name="description"...> : résumé de l’application, utile pour le référencement ou le partage.
+
+d) Polices Google Fonts
+- Chargement de polices modernes via Google Fonts :
+  - Plus Jakarta Sans
+  - JetBrains Mono
+
+Cela améliore l’esthétique visuelle de l’interface.
+
+e) CSS
+- <link rel="stylesheet" href="style.css">
+- Le fichier CSS donne le style complet :
+  - fonds étoilés
+  - cartes
+  - formulaire
+  - boutons
+  - filtres
+  - animations
+
+3) <body>
+Conteneur principal
+- <div class="app-wrapper"> : wrapper général de toute l’application.
+
+4) Header : bandeau d’en-tête
+<section>
+- <header class="main-header"> : zone de titre + statistiques
+
+a) header-branding
+Contient :
+- logo-badge : petite pastille avec un emoji 👾
+- brand-tag : “Startup GlitchZero • Dette Technique Mystique”
+- main-title : “Registre des Anomalies”
+
+C’est la partie visuelle de présentation de l’application.
+
+b) header-stats
+Zone contenant les indicateurs :
+- Anomalies visibles
+  - <span id="counter-bugs">0</span>
+- Cagnotte de primes (Bonus)
+  - <span id="total-bounty">0</span>
+
+Ces éléments sont importants car le JavaScript les met à jour dynamiquement avec les résultats des filtres.
+
+5) <main class="main-layout">
+C’est le bloc principal contenant deux colonnes.
+
+a) Colonne gauche : formulaire d’ajout
+<aside class="sidebar-section">
+- zone latérale qui accueille le formulaire de déclaration d’anomalie.
+
+Inside :
+- <section class="form-container">
+- <div class="section-header">
+  - h2 : “Signaler une anomalie”
+  - p : “Immortalisez un bug insolite en production”
+
+Ensuite :
+- <form id="bug-form" class="bug-form" novalidate>
+
+Le formulaire contient :
+- titre
+- auteur
+- sévérité
+- récompense
+- description
+- bouton de publication
+
+Champs détaillés :
+- bug-titre : nom de l’anomalie
+- bug-auteur : déclarant / auteur
+- bug-severite : liste déroulante avec :
+  - Basse
+  - Moyenne
+  - Critique
+- bug-recompense : input number, avec valeur par défaut 50
+- bug-description : zone de texte libre
+- submit-btn : bouton “Publier l’anomalie”
+
+Le JS écoute ce formulaire avec un addEventListener("submit", ...) pour ajouter une anomalie à la liste.
+
+6) Colonne droite : contenu principal
+<section class="content-section">
+Cette zone contient :
+- recherche
+- filtres
+- grille des cartes
+
+a) controls-card
+C’est la zone de contrôle :
+- recherche textuelle
+- filtres de sévérité
+
+Recherche :
+- <input type="text" id="search-input" ...>
+- placeholder : “Recherche par mot-clé (titre, description)...”
+- bouton clear search avec id btn-clear-search
+- hidden : initialement caché, il apparaît quand l’utilisateur tape quelque chose
+
+Filtres :
+- <div id="filter-bar" class="filter-bar">
+- 4 boutons :
+  - Tous
+  - Critique
+  - Moyenne
+  - Basse
+
+Le JS ajoute ou retire la classe active selon le filtre sélectionné.
+
+b) bug-grid
+- <div id="bug-grid" class="bug-grid" aria-live="polite">
+- C’est le conteneur où le JavaScript injecte les cartes d’anomalies.
+
+Le commentaire indique clairement :
+- “Les cartes (<article class="card">) seront injectées dynamiquement ici via JS”
+
+7) Footer
+<footer class="main-footer">
+Contient :
+- “GlitchZero © 2026 • BTS SIO 2ème Année • TP JavaScript — Le Registre des Anomalies Mystiques”
+
+C’est juste une zone de bas de page informative.
+
+8) Script JavaScript
+- <script src="app.js"></script>
+
+C’est le fichier logique qui :
+- lit les éléments du DOM,
+- initialise l’état,
+- gère les filtres,
+- génère les cartes,
+- ajoute/supprime les anomalies,
+- actualise le compteur et la cagnotte.
+
+9) Rôle de chaque élément HTML dans le JS
+Ce fichier est construit pour que le JS puisse interagir facilement sur des id et classes :
+
+- #counter-bugs : compteur visuel
+- #total-bounty : total de récompense
+- #bug-form : formulaire d’ajout
+- #search-input : champ de recherche
+- #btn-clear-search : bouton effacer recherche
+- #filter-bar : conteneur des filtres
+- .btn-filter : bouton de filtre
+- #bug-grid : zone où sont affichées les cartes
+- .btn-resolve : bouton “Résoudre” sur chaque carte
+- .toast-container : conteneur généré par JS pour les notifications
+
+10) Structure mentale du fichier
+On peut résumer ainsi :
+- <head> : metadata + style
+- <body> :
+  - header : titre et statistiques
+  - main :
+    - formulaire
+    - zone de recherche + filtres
+    - grille de bugs
+  - footer
+- <script> : logique interactive
+-->
