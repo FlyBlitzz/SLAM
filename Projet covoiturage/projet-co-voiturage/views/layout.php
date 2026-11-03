@@ -18,7 +18,8 @@
         </div>
 
         <nav class="nav-bar" aria-label="Navigation principale">
-            <a href="index.php?action=bienvenue"<?= $pageCourante === 'bienvenue' ? ' class="active" aria-current="page"' : '' ?>>Bienvenue</a>
+            <a href="index.php?action=bienvenue" <?= $pageCourante === 'bienvenue' ? ' class="active" aria-current="page"' : '' ?>>Bienvenue</a>
+            <a href="index.php?action=inscription" <?= $pageCourante === 'inscription' ? ' class="active" aria-current="page"' : '' ?>>Créer un compte</a>
         </nav>
     </header>
 

@@ -115,6 +115,51 @@ h1 {
     margin-top: 1.5rem;
 }
 
+.account-form {
+    max-width: 560px;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.form-field input:focus-visible,
+button:focus-visible {
+    outline: 3px solid #1d4ed8;
+    outline-offset: 2px;
+}
+
+.field-error {
+    margin: 0.25rem 0 0;
+    color: #b91c1c;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+button.btn {
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 .error-card {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;

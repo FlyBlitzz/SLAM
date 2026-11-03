@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../View/view.php';
 require_once __DIR__ . '/../Controller/bienvenueControleur.php';
+require_once __DIR__ . '/../Controller/inscriptionControleur.php';
 
 function afficherErreur404(string $action = ''): void
 {
@@ -49,5 +50,6 @@ function routerRequete(PDO $connexion): void
 
     match ($action) {
         'bienvenue' => afficherBienvenue($connexion),
+        'inscription' => afficherInscription($connexion),
     };
 }
