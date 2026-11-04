@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../View/view.php';
 require_once __DIR__ . '/../Controller/bienvenueControleur.php';
 require_once __DIR__ . '/../Controller/inscriptionControleur.php';
+require_once __DIR__ . '/../Controller/connexionControleur.php';
 
 function afficherErreur404(string $action = ''): void
 {
@@ -48,8 +49,40 @@ function routerRequete(PDO $connexion): void
         return;
     }
 
+    $utilisateurConnecte = null;
+    $idUtilisateur = $_SESSION['utilisateur_id'] ?? null;
+    if (is_int($idUtilisateur)) {
+        try {
+            $utilisateurConnecte = trouverUtilisateurParId($connexion, $idUtilisateur);
+        } catch (PDOException $erreur) {
+            error_log('Vérification de la session impossible : ' . $erreur->getMessage());
+            http_response_code(503);
+            afficherVue('errors/503', [
+                'titre' => 'Service temporairement indisponible',
+                'pageCourante' => '',
+            ]);
+            return;
+        }
+
+        if ($utilisateurConnecte === null) {
+            unset($_SESSION['utilisateur_id']);
+        }
+    }
+
+    if ($utilisateurConnecte !== null && in_array($action, ['inscription', 'connexion'], true)) {
+        header('Location: index.php?action=espace', true, 303);
+        exit;
+    }
+
+    if ($action === 'espace' && $utilisateurConnecte === null) {
+        header('Location: index.php?action=connexion', true, 303);
+        exit;
+    }
+
     match ($action) {
         'bienvenue' => afficherBienvenue($connexion),
         'inscription' => afficherInscription($connexion),
+        'connexion' => afficherConnexion($connexion),
+        'espace' => afficherEspace($utilisateurConnecte),
     };
 }

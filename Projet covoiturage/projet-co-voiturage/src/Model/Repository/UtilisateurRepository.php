@@ -1,5 +1,5 @@
 <?php
-
+//COLLATE NOCASE rend la comparaison insensible à la casse, ce qui est utile pour les adresses e-mail
 function obtenirCodeInscription(PDO $connexion): ?string
 {
     $requete = $connexion->query(
@@ -11,6 +11,44 @@ function obtenirCodeInscription(PDO $connexion): ?string
     $code = $requete->fetchColumn();
 
     return is_string($code) ? trim($code) : null;
+}
+
+function adresseEmailExiste(PDO $connexion, string $email): bool
+{
+    $requete = $connexion->prepare(
+        'SELECT 1 FROM utilisateurs WHERE email = :email COLLATE NOCASE LIMIT 1'
+    );
+    $requete->execute(['email' => $email]);
+
+    return $requete->fetchColumn() !== false;
+}
+
+function trouverUtilisateurPourConnexion(PDO $connexion, string $email): ?array
+{
+    $requete = $connexion->prepare(
+        'SELECT id, nom, prenom, email, mot_de_passe
+         FROM utilisateurs
+         WHERE email = :email COLLATE NOCASE
+         LIMIT 1'
+    );
+    $requete->execute(['email' => $email]);
+    $utilisateur = $requete->fetch();
+
+    return is_array($utilisateur) ? $utilisateur : null;
+}
+
+function trouverUtilisateurParId(PDO $connexion, int $id): ?array
+{
+    $requete = $connexion->prepare(
+        'SELECT id, nom, prenom, email
+         FROM utilisateurs
+         WHERE id = :id
+         LIMIT 1'
+    );
+    $requete->execute(['id' => $id]);
+    $utilisateur = $requete->fetch();
+
+    return is_array($utilisateur) ? $utilisateur : null;
 }
 
 function creerUtilisateur(

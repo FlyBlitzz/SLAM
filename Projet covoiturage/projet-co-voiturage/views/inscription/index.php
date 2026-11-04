@@ -23,15 +23,15 @@
         <form class="account-form" method="post" action="index.php?action=inscription" novalidate>
             <?php
             $champs = [
-                'nom' => ['Nom', 'text', 'Ex. : Dupont'],
-                'prenom' => ['Prénom', 'text', 'Ex. : Marie'],
-                'email' => ['Adresse électronique académique', 'email', 'Ex. : prenom.nom@ac-besancon.fr'],
-                'telephone' => ['Numéro de téléphone', 'tel', 'Ex. : 06 12 34 56 78'],
-                'mot_de_passe' => ['Mot de passe', 'password', 'Choisissez votre mot de passe'],
-                'code_inscription' => ['Code d’inscription', 'text', 'Saisissez le code fourni par le lycée'],
+                'nom' => ['Nom', 'text', 'family-name', 'Ex. : Dupont'],
+                'prenom' => ['Prénom', 'text', 'given-name', 'Ex. : Marie'],
+                'email' => ['Adresse électronique académique', 'email', 'email', 'Ex. : prenom.nom@ac-besancon.fr'],
+                'telephone' => ['Numéro de téléphone', 'tel', 'tel', 'Ex. : 06 12 34 56 78'],
+                'mot_de_passe' => ['Mot de passe', 'password', 'new-password', 'Choisissez votre mot de passe'],
+                'code_inscription' => ['Code d’inscription', 'text', 'off', 'Saisissez le code fourni par le lycée'],
             ];
             ?>
-            <?php foreach ($champs as $champ => [$libelle, $type, $placeholder]): ?>
+            <?php foreach ($champs as $champ => [$libelle, $type, $autocomplete, $placeholder]): ?>
                 <div class="form-field">
                     <label for="<?= htmlspecialchars($champ, ENT_QUOTES, 'UTF-8') ?>">
                         <?= htmlspecialchars($libelle, ENT_QUOTES, 'UTF-8') ?>
@@ -40,6 +40,7 @@
                     <input id="<?= htmlspecialchars($champ, ENT_QUOTES, 'UTF-8') ?>"
                         name="<?= htmlspecialchars($champ, ENT_QUOTES, 'UTF-8') ?>"
                         type="<?= htmlspecialchars($type, ENT_QUOTES, 'UTF-8') ?>"
+                        autocomplete="<?= htmlspecialchars($autocomplete, ENT_QUOTES, 'UTF-8') ?>"
                         placeholder="<?= htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8') ?>" required
                         <?= isset($erreurs[$champ])
                             ? 'aria-describedby="erreur-' . htmlspecialchars($champ, ENT_QUOTES, 'UTF-8') . '" aria-invalid="true"'

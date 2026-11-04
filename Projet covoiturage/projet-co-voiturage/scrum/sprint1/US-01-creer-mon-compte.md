@@ -1,7 +1,7 @@
 # US-01 — Créer mon compte
 
 **Priorité :** P1 — Essentielle  
-**Statut :** À faire  
+**Statut :** Finalisée  
 **Prérequis :** [US-0-BIS — Créer la table des paramètres](US-0-BIS-configurer-le-code-inscription.md) réalisée ; code commun renseigné manuellement dans la base et communiqué aux enseignants.  
 **Références :** [Backlog](backlog.md), [cahier des charges](../documentation/cahier-des-charges.md) : F01, sections 4.1 et 8, recette R01.
 

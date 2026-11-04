@@ -27,13 +27,13 @@ function afficherInscription(PDO $connexion): void
         $codeInscription = is_string($codeInscription) ? trim($codeInscription) : '';
 
         foreach ([
-            'nom' => 'Nom',
-            'prenom' => 'Prénom',
-            'email' => 'Adresse électronique',
-            'telephone' => 'Numéro de téléphone',
+            'nom' => 'Le nom',
+            'prenom' => 'Le prénom',
+            'email' => 'L’adresse électronique',
+            'telephone' => 'Le numéro de téléphone',
         ] as $champ => $libelle) {
             if ($valeurs[$champ] === '') {
-                $erreurs[$champ] = "Le champ « {$libelle} » est obligatoire.";
+                $erreurs[$champ] = "{$libelle} est obligatoire.";
             }
         }
 
@@ -59,9 +59,24 @@ function afficherInscription(PDO $connexion): void
 
         if (
             $valeurs['telephone'] !== ''
-            && preg_match('/^0[1-9](?:[ .-]?\d{2}){4}$/', $valeurs['telephone']) !== 1
+            && preg_match('/^0[1-9](?: [0-9]{2}){4}$/', $valeurs['telephone']) !== 1
         ) {
             $erreurs['telephone'] = 'Veuillez saisir un numéro de téléphone valide au format 06 12 34 56 78.';
+        }
+
+        if (
+            $valeurs['email'] !== ''
+            && filter_var($valeurs['email'], FILTER_VALIDATE_EMAIL) !== false
+            && strtolower((string) strrchr($valeurs['email'], '@')) === '@ac-besancon.fr'
+        ) {
+            try {
+                if (adresseEmailExiste($connexion, $valeurs['email'])) {
+                    $erreurs['email'] = 'Cette adresse électronique est déjà utilisée.';
+                }
+            } catch (PDOException $erreur) {
+                error_log('Vérification de l’adresse électronique impossible : ' . $erreur->getMessage());
+                $erreurs['email'] = 'Impossible de vérifier cette adresse. Réessayez plus tard.';
+            }
         }
 
         if ($erreurs === []) {
